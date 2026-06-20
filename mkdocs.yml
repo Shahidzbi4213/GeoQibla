@@ -1,0 +1,97 @@
+site_name: GeoQibla
+site_description: Kotlin Multiplatform Compose Qibla direction library
+site_author: Shahid Iqbal
+site_url: https://shahidzbi4213.github.io/GeoQibla/
+repo_url: https://github.com/Shahidzbi4213/GeoQibla
+repo_name: Shahidzbi4213/GeoQibla
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  logo: assets/geoqibla-logo.png
+  favicon: assets/favicon.png
+  language: en
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - toc.follow
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - toc:
+      permalink: true
+  - tables
+  - md_in_html
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Quick Start: getting-started/quick-start.md
+    - Configuration: getting-started/configuration.md
+  - Guides:
+    - Default Screen: guides/default-screen.md
+    - Custom UI: guides/custom-ui.md
+    - Styling and Localization: guides/styling-localization.md
+    - Slots and Components: guides/slots-and-components.md
+    - Platform Behavior: guides/platform-behavior.md
+    - Architecture: guides/architecture.md
+  - API Reference:
+    - GeoQiblaScreen: api/geoqibla-screen.md
+    - QiblaController: api/qibla-controller.md
+    - QiblaConfig: api/qibla-config.md
+    - State Models: api/state-models.md
+    - Style, Strings, and Slots: api/style-strings-slots.md
+    - Public Composables: api/public-composables.md
+  - Examples:
+    - Android: examples/android.md
+    - iOS: examples/ios.md
+  - Troubleshooting: troubleshooting.md
+  - Contributing: contributing.md
+  - License: license.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Shahidzbi4213/GeoQibla
+      name: GitHub
+  version: 0.0.1
+
+extra_css:
+  - stylesheets/extra.css
+
+copyright: Copyright &copy; 2026 GeoQibla

@@ -1,8 +1,10 @@
 # GeoQibla
 
-GeoQibla is a Kotlin Multiplatform Compose library for showing Qibla direction
-in Android and iOS apps. It provides a ready-made shared screen and a headless
-controller for custom UI.
+[Documentation](https://shahidzbi4213.github.io/GeoQibla/) | [GitHub](https://github.com/Shahidzbi4213/GeoQibla)
+
+GeoQibla is a Kotlin Multiplatform Compose library for showing Qibla direction in Android and iOS apps. It provides a ready-made shared screen, a headless controller for custom UI, and styling, string, and slot APIs for product-specific presentation.
+
+Current version: `0.0.1`
 
 ## Install
 
@@ -18,7 +20,7 @@ kotlin {
 }
 ```
 
-## Usage
+## Quick Usage
 
 ```kotlin
 import androidx.compose.runtime.Composable
@@ -35,26 +37,27 @@ fun QiblaRoute() {
 }
 ```
 
-## Custom UI
+## API Overview
 
-Use `QiblaController.state` when you want to build your own screen:
+- `GeoQiblaScreen`: ready-made adaptive screen with compass, status, messages, and action buttons.
+- `rememberQiblaController`: creates a controller backed by Android or iOS platform services.
+- `QiblaController.state`: `StateFlow<QiblaState>` for custom UIs.
+- `QiblaConfig`: alignment thresholds, smoothing, location interval, tilt and magnetic limits, haptics, and `onAligned`.
+- `QiblaStyle`, `QiblaStrings`, and `QiblaSlots`: styling, localization, RTL behavior, and region replacement.
+- `QiblaCompassDial`, `QiblaStatusPanel`, and `QiblaStateMessage`: reusable public UI components.
+
+## Custom UI
 
 ```kotlin
 val controller = rememberQiblaController()
 val state by controller.state.collectAsState()
 ```
 
-The default UI can also be customized with:
-
-- `QiblaStyle`
-- `QiblaStrings`
-- `QiblaSlots`
+Use `state.uiState`, `state.compass`, and `state.location` to render your own flow while delegating platform location and heading behavior to GeoQibla.
 
 ## Platform Notes
 
-Android apps should use minSdk 26 or newer. GeoQibla requests foreground
-location access through the shared UI and uses Android framework location and
-sensor APIs.
+Android apps should use minSdk 26 or newer. GeoQibla declares foreground location permissions in its Android library manifest, requests runtime location permission from the default UI, and uses Android framework location and sensor APIs.
 
 iOS apps should include location usage text in `Info.plist`:
 
@@ -62,3 +65,18 @@ iOS apps should include location usage text in `Info.plist`:
 <key>NSLocationWhenInUseUsageDescription</key>
 <string>GeoQibla uses your location to calculate the direction of the Qibla.</string>
 ```
+
+Compass behavior should be verified on physical devices. Emulators and simulators are useful for layout and permission-state checks, but not final heading accuracy.
+
+## Documentation
+
+The full docs site is configured with MkDocs Material and published to GitHub Pages:
+
+- [Getting started](https://shahidzbi4213.github.io/GeoQibla/getting-started/installation/)
+- [Configuration](https://shahidzbi4213.github.io/GeoQibla/getting-started/configuration/)
+- [Custom UI](https://shahidzbi4213.github.io/GeoQibla/guides/custom-ui/)
+- [Troubleshooting](https://shahidzbi4213.github.io/GeoQibla/troubleshooting/)
+
+## License
+
+Apache 2.0.
