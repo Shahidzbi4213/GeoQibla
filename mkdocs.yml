@@ -8,8 +8,8 @@ edit_uri: edit/main/docs/
 
 theme:
   name: material
-  logo: assets/geoqibla-logo.png
-  favicon: assets/favicon.png
+  logo: assets/geoqibla-icon.svg
+  favicon: assets/geoqibla-icon.svg
   language: en
   palette:
     - media: "(prefers-color-scheme: light)"
