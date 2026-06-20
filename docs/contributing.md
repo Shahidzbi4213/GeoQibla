@@ -24,6 +24,12 @@ mkdocs gh-deploy --force
 
 The library version source is `VERSION_NAME` in `gradle.properties`. Documentation snippets should match the latest published version.
 
+## Release Automation
+
+The Publish workflow publishes the shared artifact only when Maven Central does not already have the selected version. After that, it creates or updates the matching GitHub Release.
+
+Run the Publish workflow manually with version `0.0.1` to backfill the missing release for the version that is already on Maven Central.
+
 ## Pull Requests
 
 Keep changes focused:
