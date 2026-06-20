@@ -12,7 +12,7 @@ Add the dependency in your KMP module's `commonMain` source set:
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("com.shahid.tech.qibla:geoqibla:0.0.1")
+            implementation("io.github.shahid-iqbal:geoqibla:0.0.1")
         }
     }
 }

@@ -6,10 +6,15 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.mavenPublish)
+    signing
 }
 
-group = "com.shahid.tech.qibla"
+group = providers.gradleProperty("GROUP").getOrElse("io.github.shahid-iqbal")
 version = providers.gradleProperty("VERSION_NAME").getOrElse("0.0.1")
+
+signing {
+    useGpgCmd()
+}
 
 kotlin {
     listOf(
