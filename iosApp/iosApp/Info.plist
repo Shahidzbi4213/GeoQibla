@@ -4,5 +4,9 @@
 <dict>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>GeoQibla uses your location to calculate the direction of the Qibla.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>GeoQibla uses your location only while the app is open.</string>
 </dict>
 </plist>
