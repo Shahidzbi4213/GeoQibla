@@ -9,7 +9,7 @@ plugins {
     signing
 }
 
-group = providers.gradleProperty("GROUP").getOrElse("io.github.shahid-iqbal")
+group = providers.gradleProperty("GROUP").getOrElse("io.github.shahidzbi4213")
 version = providers.gradleProperty("VERSION_NAME").getOrElse("0.0.1")
 
 signing {
