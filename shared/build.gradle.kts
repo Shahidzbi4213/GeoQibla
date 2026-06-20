@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.shahid.tech.qibla"
-version = providers.gradleProperty("VERSION_NAME").getOrElse("0.1.0-SNAPSHOT")
+version = providers.gradleProperty("VERSION_NAME").getOrElse("0.0.1")
 
 kotlin {
     listOf(

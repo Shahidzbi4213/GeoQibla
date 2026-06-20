@@ -1,124 +1,64 @@
 # GeoQibla
 
-GeoQibla is a Kotlin Multiplatform Compose library for Qibla direction. It owns
-foreground location permission, framework location updates, compass/heading
-updates, state orchestration, and a default shared UI for Android and iOS KMP
-consumers.
+GeoQibla is a Kotlin Multiplatform Compose library for showing Qibla direction
+in Android and iOS apps. It provides a ready-made shared screen and a headless
+controller for custom UI.
 
-Coordinates:
+## Install
 
-```kotlin
-implementation("com.shahid.tech.qibla:geoqibla:<version>")
-```
-
-The Maven Central namespace `com.shahid.tech.qibla` must be verified before any
-release. If that namespace cannot be verified, change the group ID before
-publishing.
-
-## Public API
+Add the dependency in your KMP module's `commonMain` source set:
 
 ```kotlin
-val controller = rememberQiblaController(
-    config = QiblaConfig(
-        nearDegrees = 10f,
-        alignedDegrees = 3f,
-    ),
-)
-
-GeoQiblaScreen(
-    controller = controller,
-    style = QiblaStyle.default(),
-    strings = QiblaStrings.default(),
-    slots = QiblaSlots.default(),
-)
-```
-
-Use `controller.state` for a headless/custom UI:
-
-```kotlin
-interface QiblaController {
-    val state: StateFlow<QiblaState>
-    fun start()
-    fun stop()
-    fun retryLocation()
-    fun requestPermission()
-    fun openLocationSettings()
-    fun openAppSettings()
-    fun dismissCalibration()
+kotlin {
+    sourceSets {
+        commonMain.dependencies {
+            implementation("com.shahid.tech.qibla:geoqibla:0.0.1")
+        }
+    }
 }
 ```
 
-The default `GeoQiblaScreen` starts the controller on composition and stops it
-when disposed. Custom/headless consumers can call `start()` and `stop()`
-directly.
+## Usage
 
-## Platform Setup
+```kotlin
+import androidx.compose.runtime.Composable
+import com.shahid.tech.qibla.GeoQiblaScreen
+import com.shahid.tech.qibla.rememberQiblaController
 
-Android:
+@Composable
+fun QiblaRoute() {
+    val controller = rememberQiblaController()
 
-- Minimum SDK: 26.
-- The library manifest declares `ACCESS_COARSE_LOCATION` and
-  `ACCESS_FINE_LOCATION`.
-- The default Android backend uses `LocationManager`, `SensorManager` rotation
-  vector, accelerometer/magnetometer fallback, and `GeomagneticField`. It does
-  not require Google Play Services.
-
-iOS:
-
-- Minimum supported host app target: iOS 15+.
-- Add these keys to the host app `Info.plist`:
-  - `NSLocationWhenInUseUsageDescription`
-  - `NSLocationAlwaysAndWhenInUseUsageDescription`
-  - `CADisableMinimumFrameDurationOnPhone`
-- The sample app embeds Compose with `ComposeUIViewController`.
-
-## Customization
-
-- `QiblaStyle` controls colors, dimensions, typography, shapes, and animation
-  timings.
-- `QiblaStrings.english()` and `QiblaStrings.arabic()` provide built-in EN/AR
-  strings.
-- `QiblaSlots` can replace top bar, compass dial, target badge, status rows,
-  state message, calibration sheet, or action buttons.
-- Public component composables include `QiblaCompassDial`, `QiblaStatusPanel`,
-  and `QiblaStateMessage`.
-
-## Verification
-
-Useful local checks:
-
-```bash
-./gradlew :shared:testAndroidHostTest
-./gradlew :shared:compileKotlinIosSimulatorArm64
-./gradlew :shared:compileKotlinIosArm64
-./gradlew :androidApp:assembleDebug
-./gradlew :shared:publishToMavenLocal
+    GeoQiblaScreen(
+        controller = controller,
+    )
+}
 ```
 
-The broad `:shared:allTests` task may also run iOS simulator tests depending on
-the local host setup.
+## Custom UI
 
-## Publishing
+Use `QiblaController.state` when you want to build your own screen:
 
-The shared module is configured for a single Maven coordinate:
-
-```text
-com.shahid.tech.qibla:geoqibla
+```kotlin
+val controller = rememberQiblaController()
+val state by controller.state.collectAsState()
 ```
 
-Kotlin Multiplatform publishes a root publication plus target-specific
-publications. Verify after local publish that the root metadata, Android
-artifact, and iOS artifacts are present.
+The default UI can also be customized with:
 
-Release publishing uses `.github/workflows/publish.yml` on GitHub releases. The
-workflow expects these repository secrets:
+- `QiblaStyle`
+- `QiblaStrings`
+- `QiblaSlots`
 
-- `MAVEN_CENTRAL_USERNAME`
-- `MAVEN_CENTRAL_PASSWORD`
-- `SIGNING_KEY_ID`
-- `SIGNING_PASSWORD`
-- `GPG_KEY_CONTENTS`
+## Platform Notes
 
-The default local `VERSION_NAME` is `0.1.0-SNAPSHOT`. The workflow strips a
-leading `v` from the GitHub release tag and passes that value as the release
-version.
+Android apps should use minSdk 26 or newer. GeoQibla requests foreground
+location access through the shared UI and uses Android framework location and
+sensor APIs.
+
+iOS apps should include location usage text in `Info.plist`:
+
+```xml
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>GeoQibla uses your location to calculate the direction of the Qibla.</string>
+```
