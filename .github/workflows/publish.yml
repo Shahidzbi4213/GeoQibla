@@ -1,8 +1,20 @@
 name: Publish
 
 on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to publish and release. Defaults to VERSION_NAME in gradle.properties.
+        required: false
+        type: string
+  push:
+    tags:
+      - 'v*'
   release:
     types: [released, prereleased]
+
+permissions:
+  contents: write
 
 jobs:
   publish:
@@ -20,11 +32,52 @@ jobs:
           java-version: 21
 
       - name: Set release version
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_VERSION: ${{ inputs.version }}
         run: |
-          VERSION="${GITHUB_REF_NAME#v}"
+          if [[ "$EVENT_NAME" == "workflow_dispatch" && -n "$INPUT_VERSION" ]]; then
+            VERSION="$INPUT_VERSION"
+          elif [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            VERSION="${GITHUB_REF_NAME}"
+          elif [[ "$EVENT_NAME" == "release" ]]; then
+            VERSION="${GITHUB_REF_NAME}"
+          else
+            VERSION="$(awk -F= '/^VERSION_NAME=/{ print $2; exit }' gradle.properties)"
+          fi
+
+          VERSION="${VERSION#v}"
+
+          if [[ -z "$VERSION" ]]; then
+            echo "Could not resolve release version." >&2
+            exit 1
+          fi
+
           echo "VERSION_NAME=${VERSION}" >> "$GITHUB_ENV"
+          echo "RELEASE_TAG=v${VERSION}" >> "$GITHUB_ENV"
+
+      - name: Check Maven Central
+        shell: bash
+        run: |
+          GROUP="$(awk -F= '/^GROUP=/{ print $2; exit }' gradle.properties)"
+          ARTIFACT="$(awk -F= '/^POM_ARTIFACT_ID=/{ print $2; exit }' gradle.properties)"
+          GROUP_PATH="${GROUP//./\/}"
+          POM_URL="https://repo1.maven.org/maven2/${GROUP_PATH}/${ARTIFACT}/${VERSION_NAME}/${ARTIFACT}-${VERSION_NAME}.pom"
+          HTTP_STATUS="$(curl --location --silent --output /dev/null --write-out "%{http_code}" "$POM_URL" || true)"
+
+          echo "MAVEN_POM_URL=${POM_URL}" >> "$GITHUB_ENV"
+
+          if [[ "$HTTP_STATUS" == "200" ]]; then
+            echo "MAVEN_VERSION_EXISTS=true" >> "$GITHUB_ENV"
+            echo "Maven Central already has ${ARTIFACT}:${VERSION_NAME}."
+          else
+            echo "MAVEN_VERSION_EXISTS=false" >> "$GITHUB_ENV"
+            echo "Maven Central does not have ${ARTIFACT}:${VERSION_NAME}; publishing will run."
+          fi
 
       - name: Publish to Maven Central
+        if: env.MAVEN_VERSION_EXISTS != 'true'
         run: ./gradlew :shared:publishToMavenCentral -PVERSION_NAME="$VERSION_NAME" --no-configuration-cache
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
@@ -32,3 +85,9 @@ jobs:
           ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.SIGNING_KEY_ID }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY_CONTENTS }}
+
+      - name: Create or update GitHub release
+        run: .github/scripts/create-github-release.sh "$VERSION_NAME"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TARGET: ${{ github.sha }}
