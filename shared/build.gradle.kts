@@ -12,10 +12,6 @@ plugins {
 group = providers.gradleProperty("GROUP").getOrElse("io.github.shahidzbi4213")
 version = providers.gradleProperty("VERSION_NAME").getOrElse("0.0.2")
 
-signing {
-    useGpgCmd()
-}
-
 kotlin {
     listOf(
         iosArm64(),
