@@ -14,7 +14,7 @@ fun QiblaCompassDial(
 )
 ```
 
-Draws the compass dial, Qibla bearing label, and animated direction marker.
+Draws the compass rose, animated direction needle, and Kaaba target marker.
 
 ## QiblaStatusPanel
 
@@ -28,7 +28,7 @@ fun QiblaStatusPanel(
 )
 ```
 
-Shows bearing, current heading, adjustment, distance, location label, sensor accuracy, and orientation source.
+Shows current heading, adjustment, distance, location label, sensor accuracy, and orientation source.
 
 ## QiblaStateMessage
 

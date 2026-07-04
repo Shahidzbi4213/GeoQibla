@@ -89,7 +89,7 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/Shahidzbi4213/GeoQibla
       name: GitHub
-  version: 0.0.1
+  version: 0.0.2
 
 extra_css:
   - stylesheets/extra.css

@@ -5,7 +5,7 @@
 Confirm your repositories include Maven Central and the dependency uses the current version:
 
 ```kotlin
-implementation("io.github.shahidzbi4213:geoqibla:0.0.1")
+implementation("io.github.shahidzbi4213:geoqibla:0.0.2")
 ```
 
 If you use a version catalog, sync after updating `libs.versions.toml`.

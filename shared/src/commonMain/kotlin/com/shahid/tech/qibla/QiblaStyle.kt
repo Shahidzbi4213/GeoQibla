@@ -22,17 +22,17 @@ data class QiblaStyle(
 }
 
 data class QiblaColors(
-    val background: Color = Color(0xFFFAFAF7),
+    val background: Color = Color(0xFFF5F7F3),
     val surface: Color = Color(0xFFFFFFFF),
-    val surfaceVariant: Color = Color(0xFFF0F3EE),
-    val content: Color = Color(0xFF202523),
-    val secondaryContent: Color = Color(0xFF5D6662),
-    val outline: Color = Color(0xFFD7DDD8),
-    val primary: Color = Color(0xFF096B58),
+    val surfaceVariant: Color = Color(0xFFE8EFEA),
+    val content: Color = Color(0xFF17221E),
+    val secondaryContent: Color = Color(0xFF5B6963),
+    val outline: Color = Color(0xFFD5DED8),
+    val primary: Color = Color(0xFF075E4D),
     val onPrimary: Color = Color(0xFFFFFFFF),
-    val qibla: Color = Color(0xFF0A7C66),
-    val near: Color = Color(0xFFB87900),
-    val aligned: Color = Color(0xFF167D38),
+    val qibla: Color = Color(0xFFC28A2C),
+    val near: Color = Color(0xFF9A6900),
+    val aligned: Color = Color(0xFF0B7A48),
     val warning: Color = Color(0xFF9C4A00),
     val error: Color = Color(0xFFB3261E),
     val compassTick: Color = Color(0xFF7B8580),
@@ -41,8 +41,8 @@ data class QiblaColors(
 data class QiblaDimensions(
     val screenPadding: Dp = 20.dp,
     val compactScreenPadding: Dp = 16.dp,
-    val contentGap: Dp = 16.dp,
-    val panelPadding: Dp = 16.dp,
+    val contentGap: Dp = 18.dp,
+    val panelPadding: Dp = 18.dp,
     val compassMinSize: Dp = 240.dp,
     val compassMaxSize: Dp = 360.dp,
     val statusRowMinHeight: Dp = 44.dp,
@@ -50,9 +50,9 @@ data class QiblaDimensions(
 
 data class QiblaTypography(
     val title: TextStyle = TextStyle(
-        fontSize = 24.sp,
-        lineHeight = 30.sp,
-        fontWeight = FontWeight.SemiBold,
+        fontSize = 28.sp,
+        lineHeight = 34.sp,
+        fontWeight = FontWeight.Bold,
     ),
     val subtitle: TextStyle = TextStyle(
         fontSize = 14.sp,
@@ -75,16 +75,16 @@ data class QiblaTypography(
         fontWeight = FontWeight.Medium,
     ),
     val numeric: TextStyle = TextStyle(
-        fontSize = 20.sp,
-        lineHeight = 26.sp,
-        fontWeight = FontWeight.SemiBold,
+        fontSize = 28.sp,
+        lineHeight = 34.sp,
+        fontWeight = FontWeight.Bold,
     ),
 )
 
 data class QiblaShapes(
-    val panel: Shape = RoundedCornerShape(8.dp),
-    val button: Shape = RoundedCornerShape(6.dp),
-    val badge: Shape = RoundedCornerShape(8.dp),
+    val panel: Shape = RoundedCornerShape(20.dp),
+    val button: Shape = RoundedCornerShape(14.dp),
+    val badge: Shape = RoundedCornerShape(50.dp),
 )
 
 data class QiblaAnimationTimings(

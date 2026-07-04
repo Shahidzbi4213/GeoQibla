@@ -57,9 +57,11 @@ fun GeoQiblaScreen(
                         style.dimensions.screenPadding
                     }
                     val isWide = maxWidth >= 720.dp
-                    val compassSize = maxWidth
-                        .coerceAtMost(style.dimensions.compassMaxSize)
-                        .coerceAtLeast(style.dimensions.compassMinSize)
+                    val compassSize = (maxWidth - screenPadding * 2)
+                        .coerceIn(
+                            style.dimensions.compassMinSize,
+                            style.dimensions.compassMaxSize,
+                        )
 
                     if (isWide) {
                         WideGeoQiblaContent(
@@ -166,13 +168,14 @@ private fun TopBar(
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
                 text = strings.title,
                 style = style.typography.title,
                 color = style.colors.content,
+                modifier = Modifier.weight(1f),
             )
             val targetBadge = slots.targetBadge
             if (targetBadge != null) {
@@ -249,7 +252,7 @@ private fun StatusRowsRegion(
     val customRows = slots.statusRows
     if (customRows != null) {
         customRows(state)
-    } else {
+    } else if (state.compass.qiblaBearingDegrees != null) {
         QiblaStatusPanel(state, style = style, strings = strings)
     }
 }

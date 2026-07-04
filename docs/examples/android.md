@@ -8,7 +8,7 @@ Add GeoQibla to your KMP shared module:
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("io.github.shahidzbi4213:geoqibla:0.0.1")
+            implementation("io.github.shahidzbi4213:geoqibla:0.0.2")
         }
     }
 }
