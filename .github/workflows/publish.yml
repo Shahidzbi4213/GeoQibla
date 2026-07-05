@@ -78,7 +78,7 @@ jobs:
 
       - name: Publish to Maven Central
         if: env.MAVEN_VERSION_EXISTS != 'true'
-        run: ./gradlew :shared:publishToMavenCentral -PVERSION_NAME="$VERSION_NAME" --no-configuration-cache
+        run: ./gradlew :shared:publishAndReleaseToMavenCentral -PVERSION_NAME="$VERSION_NAME" --no-configuration-cache
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
