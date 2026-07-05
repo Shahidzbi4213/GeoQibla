@@ -4,6 +4,11 @@ All notable changes to GeoQibla are documented here.
 
 ## Unreleased
 
+## 0.0.3
+
+- Fixed iOS location updates after runtime permission changes.
+- Ignored transient Core Location unknown-location errors.
+
 ## 0.0.2
 
 - Redesigned the default Qibla screen with an animated compass rose and Kaaba marker.
