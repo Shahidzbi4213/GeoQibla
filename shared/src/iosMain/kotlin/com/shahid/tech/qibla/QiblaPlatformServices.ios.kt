@@ -13,10 +13,15 @@ import kotlinx.coroutines.launch
 import platform.CoreLocation.*
 import platform.Foundation.NSDate
 import platform.Foundation.NSError
+import platform.Foundation.NSNotificationCenter
+import platform.Foundation.NSOperationQueue
 import platform.Foundation.NSURL
 import platform.Foundation.timeIntervalSince1970
 import platform.UIKit.UIApplication
 import platform.UIKit.UIApplicationOpenSettingsURLString
+import platform.UIKit.UIDevice
+import platform.UIKit.UIDeviceOrientation
+import platform.UIKit.UIDeviceOrientationDidChangeNotification
 import platform.darwin.NSObject
 import kotlin.math.sqrt
 
@@ -122,10 +127,31 @@ private class IosQiblaPlatformServices : QiblaPlatformServices {
             delegate.onHeading = { heading ->
                 trySend(heading.toSnapshot())
             }
+
+            // CLHeading values are reported relative to headingOrientation, which
+            // defaults to portrait. Keep it in sync with the physical device
+            // orientation so the heading stays correct in landscape.
+            val device = UIDevice.currentDevice
+            device.beginGeneratingDeviceOrientationNotifications()
+            device.orientation.toHeadingOrientation()?.let {
+                locationManager.headingOrientation = it
+            }
+            val orientationObserver = NSNotificationCenter.defaultCenter.addObserverForName(
+                name = UIDeviceOrientationDidChangeNotification,
+                `object` = null,
+                queue = NSOperationQueue.mainQueue,
+            ) { _ ->
+                UIDevice.currentDevice.orientation.toHeadingOrientation()?.let {
+                    locationManager.headingOrientation = it
+                }
+            }
+
             locationManager.startUpdatingHeading()
 
             awaitClose {
                 locationManager.stopUpdatingHeading()
+                NSNotificationCenter.defaultCenter.removeObserver(orientationObserver)
+                device.endGeneratingDeviceOrientationNotifications()
                 delegate.onHeading = null
             }
         }
@@ -189,6 +215,22 @@ private fun CLAuthorizationStatus.toLocationAccess(): QiblaLocationAccess =
         kCLAuthorizationStatusDenied -> QiblaLocationAccess.PERMANENTLY_DENIED
         kCLAuthorizationStatusRestricted -> QiblaLocationAccess.DENIED
         else -> QiblaLocationAccess.UNKNOWN
+    }
+
+/**
+ * Maps the physical device orientation to the matching heading reference used by
+ * [CLLocationManager.headingOrientation]. Face-up/face-down and unknown
+ * orientations return null so the last valid reference is preserved.
+ */
+private fun UIDeviceOrientation.toHeadingOrientation(): CLDeviceOrientation? =
+    when (this) {
+        UIDeviceOrientation.UIDeviceOrientationPortrait -> CLDeviceOrientationPortrait
+        UIDeviceOrientation.UIDeviceOrientationPortraitUpsideDown ->
+            CLDeviceOrientationPortraitUpsideDown
+
+        UIDeviceOrientation.UIDeviceOrientationLandscapeLeft -> CLDeviceOrientationLandscapeLeft
+        UIDeviceOrientation.UIDeviceOrientationLandscapeRight -> CLDeviceOrientationLandscapeRight
+        else -> null
     }
 
 internal fun NSError.isTransientLocationUnknown(): Boolean =
