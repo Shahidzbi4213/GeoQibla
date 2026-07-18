@@ -22,7 +22,9 @@ import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
 import android.view.HapticFeedbackConstants
+import android.view.Surface
 import android.view.View
+import android.view.WindowManager
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -214,6 +216,7 @@ private class AndroidQiblaPlatformServices(
             }
 
             val rotationMatrix = FloatArray(9)
+            val remappedRotationMatrix = FloatArray(9)
             val orientationAngles = FloatArray(3)
             val accelerometerReading = FloatArray(3)
             val magnetometerReading = FloatArray(3)
@@ -223,7 +226,23 @@ private class AndroidQiblaPlatformServices(
             var latestMagneticField: Float? = null
 
             fun sendOrientation(source: QiblaOrientationSource) {
-                SensorManager.getOrientation(rotationMatrix, orientationAngles)
+                // Sensor readings are expressed in the device's natural orientation.
+                // Remap them to the current display rotation so the azimuth stays
+                // correct when the device is rotated to landscape.
+                val axes = screenCoordinateAxes(view.currentDisplayRotation())
+                val orientationMatrix = if (
+                    SensorManager.remapCoordinateSystem(
+                        rotationMatrix,
+                        axes.axisX,
+                        axes.axisY,
+                        remappedRotationMatrix,
+                    )
+                ) {
+                    remappedRotationMatrix
+                } else {
+                    rotationMatrix
+                }
+                SensorManager.getOrientation(orientationMatrix, orientationAngles)
                 val azimuth = radiansToDegrees(orientationAngles[0])
                 val pitch = abs(radiansToDegrees(orientationAngles[1]))
                 val roll = abs(radiansToDegrees(orientationAngles[2]))
@@ -430,6 +449,47 @@ private fun Int.toQiblaAccuracy(): QiblaSensorAccuracy =
         SensorManager.SENSOR_STATUS_ACCURACY_HIGH -> QiblaSensorAccuracy.HIGH
         else -> QiblaSensorAccuracy.UNKNOWN
     }
+
+private data class ScreenCoordinateAxes(val axisX: Int, val axisY: Int)
+
+/**
+ * Axis mapping used with [SensorManager.remapCoordinateSystem] to align the
+ * sensor coordinate system with the current display rotation.
+ */
+private fun screenCoordinateAxes(displayRotation: Int): ScreenCoordinateAxes =
+    when (displayRotation) {
+        Surface.ROTATION_90 -> ScreenCoordinateAxes(
+            axisX = SensorManager.AXIS_Y,
+            axisY = SensorManager.AXIS_MINUS_X,
+        )
+
+        Surface.ROTATION_180 -> ScreenCoordinateAxes(
+            axisX = SensorManager.AXIS_MINUS_X,
+            axisY = SensorManager.AXIS_MINUS_Y,
+        )
+
+        Surface.ROTATION_270 -> ScreenCoordinateAxes(
+            axisX = SensorManager.AXIS_MINUS_Y,
+            axisY = SensorManager.AXIS_X,
+        )
+
+        else -> ScreenCoordinateAxes(
+            axisX = SensorManager.AXIS_X,
+            axisY = SensorManager.AXIS_Y,
+        )
+    }
+
+@Suppress("DEPRECATION")
+private fun View.currentDisplayRotation(): Int {
+    val displayRotation = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        context.display?.rotation
+    } else {
+        (context.getSystemService(Context.WINDOW_SERVICE) as? WindowManager)
+            ?.defaultDisplay
+            ?.rotation
+    } ?: display?.rotation
+    return displayRotation ?: Surface.ROTATION_0
+}
 
 private fun radiansToDegrees(value: Float): Float =
     (value * 180f / PI.toFloat())
