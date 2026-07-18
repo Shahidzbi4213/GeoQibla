@@ -4,6 +4,10 @@ All notable changes to GeoQibla are documented here.
 
 ## Unreleased
 
+## 0.0.4
+
+- Fixed the Qibla direction being incorrect in landscape orientation on Android and iOS.
+
 ## 0.0.3
 
 - Fixed iOS location updates after runtime permission changes.

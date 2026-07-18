@@ -3,7 +3,7 @@
 GeoQibla is published as a Kotlin Multiplatform artifact:
 
 ```kotlin
-implementation("io.github.shahidzbi4213:geoqibla:0.0.3")
+implementation("io.github.shahidzbi4213:geoqibla:0.0.4")
 ```
 
 ## KMP Dependency Setup
@@ -14,7 +14,7 @@ Add the dependency to the `commonMain` source set of the module that renders you
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("io.github.shahidzbi4213:geoqibla:0.0.3")
+            implementation("io.github.shahidzbi4213:geoqibla:0.0.4")
         }
     }
 }
@@ -26,7 +26,7 @@ If your project uses `libs.versions.toml`, define the version and library once:
 
 ```toml
 [versions]
-geoqibla = "0.0.3"
+geoqibla = "0.0.4"
 
 [libraries]
 geoqibla = { module = "io.github.shahidzbi4213:geoqibla", version.ref = "geoqibla" }

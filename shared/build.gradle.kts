@@ -10,7 +10,7 @@ plugins {
 }
 
 group = providers.gradleProperty("GROUP").getOrElse("io.github.shahidzbi4213")
-version = providers.gradleProperty("VERSION_NAME").getOrElse("0.0.3")
+version = providers.gradleProperty("VERSION_NAME").getOrElse("0.0.4")
 
 kotlin {
     listOf(

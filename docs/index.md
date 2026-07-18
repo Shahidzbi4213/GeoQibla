@@ -1,6 +1,6 @@
 # GeoQibla Documentation
 
-<span class="geoqibla-version">Version 0.0.3</span>
+<span class="geoqibla-version">Version 0.0.4</span>
 
 **Kotlin Multiplatform Compose Qibla direction UI** for Android and iOS apps. Use the default screen when you want a complete compass flow, or subscribe to controller state when you need a custom interface.
 
@@ -10,7 +10,7 @@
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("io.github.shahidzbi4213:geoqibla:0.0.3")
+            implementation("io.github.shahidzbi4213:geoqibla:0.0.4")
         }
     }
 }

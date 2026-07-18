@@ -18,7 +18,7 @@ Kotlin Multiplatform Compose Qibla direction UI for Android and iOS apps.
 
 GeoQibla gives Compose Multiplatform apps a ready-made Qibla compass screen, a headless controller for custom UI, and public styling, localization, and slot APIs for product-specific presentation.
 
-Current version: `0.0.3`
+Current version: `0.0.4`
 
 ## Features
 
@@ -38,7 +38,7 @@ Add the dependency to your KMP module's `commonMain` source set:
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("io.github.shahidzbi4213:geoqibla:0.0.3")
+            implementation("io.github.shahidzbi4213:geoqibla:0.0.4")
         }
     }
 }
@@ -50,7 +50,7 @@ Add to `gradle/libs.versions.toml`:
 
 ```toml
 [versions]
-geoqibla = "0.0.3"
+geoqibla = "0.0.4"
 
 [libraries]
 geoqibla = { module = "io.github.shahidzbi4213:geoqibla", version.ref = "geoqibla" }
