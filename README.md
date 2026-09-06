@@ -9,6 +9,9 @@ Kotlin Multiplatform Compose Qibla direction UI for Android and iOS apps.
 </p>
 
 <p align="center">
+<a href="https://trendshift.io/repositories/27829?utm_source=repository-badge&amp;utm_medium=badge&amp;utm_campaign=badge-repository-27829" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/repositories/27829" alt="geo-qibla | Trendshift" width="250" height="55"/></a>
+</p>
+<p align="center">
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.shahidzbi4213/geoqibla?label=Maven%20Central&color=096B58)](https://central.sonatype.com/artifact/io.github.shahidzbi4213/geoqibla)
 [![GitHub Release](https://img.shields.io/github/v/release/Shahidzbi4213/GeoQibla?color=096B58)](https://github.com/Shahidzbi4213/GeoQibla/releases)
