@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">GeoQibla icon</title>
+  <desc id="desc">Compact GeoQibla compass and Qibla pointer mark.</desc>
+  <rect width="512" height="512" rx="112" fill="#096B58"/>
+  <circle cx="256" cy="256" r="168" fill="none" stroke="#DDF8ED" stroke-width="28"/>
+  <circle cx="256" cy="256" r="108" fill="none" stroke="#DDF8ED" stroke-width="10" opacity="0.42"/>
+  <path d="M256 62v40M256 410v40M62 256h40M410 256h40" fill="none" stroke="#DDF8ED" stroke-width="18" stroke-linecap="round"/>
+  <path d="M256 256 350 114 317 292Z" fill="#F4C95D"/>
+  <path d="M256 256 162 398 195 220Z" fill="#DDF8ED"/>
+  <rect x="198" y="238" width="116" height="88" rx="15" fill="#061E23"/>
+  <rect x="198" y="268" width="116" height="18" fill="#F4C95D"/>
+</svg>
