@@ -18,8 +18,6 @@ Kotlin Multiplatform Compose Qibla direction UI for Android and iOS apps.
 
 GeoQibla gives Compose Multiplatform apps a ready-made Qibla compass screen, a headless controller for custom UI, and public styling, localization, and slot APIs for product-specific presentation.
 
-Current version: `0.0.4`
-
 ## Features
 
 - **Compose-first**: Drop in `GeoQiblaScreen` for a complete adaptive Qibla flow.
