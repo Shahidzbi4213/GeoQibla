@@ -1,3 +1,13 @@
+---
+title: Configuration & Tuning - GeoQibla
+description: Configure Qibla compass alignment thresholds, sensor smoothing factors, update intervals, haptic feedback, and callbacks using QiblaConfig in GeoQibla.
+keywords:
+  - qiblaconfig
+  - qibla compass smoothing
+  - compass alignment threshold
+  - geoqibla configuration
+---
+
 # Configuration
 
 `QiblaConfig` controls the runtime thresholds used by the default controller.

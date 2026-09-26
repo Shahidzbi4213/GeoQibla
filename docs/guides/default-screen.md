@@ -1,3 +1,13 @@
+---
+title: Default Screen & Compass UI - GeoQibla
+description: Learn how to use GeoQiblaScreen for a complete, responsive Qibla compass UI with adaptive layouts for compact and wide screens on Android and iOS.
+keywords:
+  - geoqiblascreen
+  - qibla compass ui
+  - compose qibla screen
+  - responsive qibla compass
+---
+
 # Default Screen
 
 `GeoQiblaScreen` is the ready-made Compose UI.

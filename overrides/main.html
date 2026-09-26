@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+
+  <!-- Primary Meta & SEO -->
+  <meta name="keywords" content="{% if page.meta and page.meta.keywords %}{% if page.meta.keywords is iterable and page.meta.keywords is not string %}{{ page.meta.keywords | join(', ') }}{% else %}{{ page.meta.keywords }}{% endif %}{% else %}qibla compass, qibla direction, kotlin multiplatform, compose multiplatform, kmp qibla, android qibla library, ios qibla compass, islamic prayer direction, qibla finder sdk, kaaba direction, geoqibla{% endif %}">
+
+  <!-- OpenGraph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GeoQibla">
+  <meta property="og:title" content="{% if page.meta and page.meta.title %}{{ page.meta.title }}{% elif page.title %}{{ page.title }} - GeoQibla{% else %}GeoQibla - Kotlin Multiplatform Compose Qibla Compass Library{% endif %}">
+  <meta property="og:description" content="{% if page.meta and page.meta.description %}{{ page.meta.description }}{% else %}{{ config.site_description }}{% endif %}">
+  <meta property="og:url" content="{{ page.canonical_url }}">
+  <meta property="og:image" content="{{ config.site_url }}assets/geoqibla-logo.png">
+  <meta property="og:image:alt" content="GeoQibla - Kotlin Multiplatform Compose Qibla Compass Library">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% if page.meta and page.meta.title %}{{ page.meta.title }}{% elif page.title %}{{ page.title }} - GeoQibla{% else %}GeoQibla - Kotlin Multiplatform Compose Qibla Compass Library{% endif %}">
+  <meta name="twitter:description" content="{% if page.meta and page.meta.description %}{{ page.meta.description }}{% else %}{{ config.site_description }}{% endif %}">
+  <meta name="twitter:image" content="{{ config.site_url }}assets/geoqibla-logo.png">
+  <meta name="twitter:image:alt" content="GeoQibla - Kotlin Multiplatform Compose Qibla Compass Library">
+
+  <!-- Search Engine Verification Hooks -->
+  {% if config.extra.google_site_verification %}
+  <meta name="google-site-verification" content="{{ config.extra.google_site_verification }}">
+  {% endif %}
+  {% if config.extra.bing_site_verification %}
+  <meta name="msvalidate.01" content="{{ config.extra.bing_site_verification }}">
+  {% endif %}
+
+  <!-- JSON-LD Structured Data for Search Engines -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "GeoQibla",
+    "description": "Kotlin Multiplatform Compose Qibla direction library for Android and iOS apps.",
+    "programmingLanguage": "Kotlin",
+    "codeRepository": "https://github.com/Shahidzbi4213/GeoQibla",
+    "runtimePlatform": ["Android", "iOS"],
+    "applicationCategory": "DeveloperApplication",
+    "license": "https://opensource.org/licenses/Apache-2.0",
+    "version": "{{ config.extra.version | default('0.0.4') }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ config.site_author | default('Shahid Iqbal') }}",
+      "url": "https://github.com/Shahidzbi4213"
+    }
+  }
+  </script>
+{% endblock %}
