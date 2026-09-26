@@ -1,3 +1,13 @@
+---
+title: Installation - GeoQibla KMP Library
+description: How to install and add GeoQibla to your Kotlin Multiplatform or Compose Multiplatform project for Android and iOS via Gradle or Version Catalog.
+keywords:
+  - geoqibla installation
+  - kmp qibla dependency
+  - compose multiplatform qibla setup
+  - gradle kmp qibla library
+---
+
 # Installation
 
 GeoQibla is published as a Kotlin Multiplatform artifact:

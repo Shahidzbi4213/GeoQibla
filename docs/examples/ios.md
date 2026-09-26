@@ -1,3 +1,13 @@
+---
+title: iOS Integration & Example - GeoQibla
+description: Copy-paste iOS setup for GeoQibla in Kotlin Multiplatform. Info.plist location permissions, CoreLocation heading configuration, and Compose UI entry point.
+keywords:
+  - ios qibla compass kmp
+  - ios qibla example
+  - compose uiviewcontroller qibla
+  - geoqibla ios integration
+---
+
 # iOS Example
 
 ## Info.plist

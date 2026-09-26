@@ -1,3 +1,13 @@
+---
+title: Custom Qibla UI & Headless Controller - GeoQibla
+description: Build a custom Qibla compass interface using QiblaController headless state in Compose Multiplatform. Access compass bearing, accuracy, and location state.
+keywords:
+  - custom qibla ui
+  - headless qibla controller
+  - qiblacontroller state
+  - compose qibla compass custom
+---
+
 # Custom UI
 
 Use `QiblaController.state` when you want your own layout.

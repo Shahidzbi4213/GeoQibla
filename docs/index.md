@@ -1,3 +1,20 @@
+---
+title: GeoQibla - Kotlin Multiplatform Compose Qibla Compass Library for Android & iOS
+description: Production-ready Qibla direction and compass UI library for Kotlin Multiplatform (KMP) and Jetpack Compose. Calculate accurate Qibla bearing with sensors on Android and iOS.
+keywords:
+  - qibla direction
+  - qibla compass
+  - kotlin multiplatform qibla
+  - compose multiplatform compass
+  - kmp qibla library
+  - android qibla direction
+  - ios qibla compass
+  - islamic prayer direction
+  - qibla finder sdk
+  - kaaba direction
+  - geoqibla
+---
+
 # GeoQibla Documentation
 
 <span class="geoqibla-version">Version 0.0.4</span>

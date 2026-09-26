@@ -1,3 +1,13 @@
+---
+title: Android Integration & Example - GeoQibla
+description: Copy-paste Android setup for GeoQibla in Kotlin Multiplatform. Gradle dependency, AndroidManifest permissions, and Compose screen implementation.
+keywords:
+  - android qibla example
+  - android qibla compass kmp
+  - android location permissions qibla
+  - geoqibla android integration
+---
+
 # Android Example
 
 ## Gradle

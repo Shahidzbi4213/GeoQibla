@@ -1,3 +1,13 @@
+---
+title: Quick Start - Build a Qibla Compass with Compose Multiplatform
+description: Get started with GeoQibla in 60 seconds. Learn how to render an adaptive Qibla compass screen with rememberQiblaController and GeoQiblaScreen.
+keywords:
+  - qibla compass quick start
+  - geoqiblascreen example
+  - rememberqiblacontroller
+  - compose multiplatform qibla tutorial
+---
+
 # Quick Start
 
 This page builds the default GeoQibla flow with the smallest useful setup.

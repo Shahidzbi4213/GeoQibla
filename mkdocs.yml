@@ -1,5 +1,5 @@
 site_name: GeoQibla
-site_description: Kotlin Multiplatform Compose Qibla direction library
+site_description: Kotlin Multiplatform Compose Qibla direction UI and sensor library for Android and iOS apps. Calculate accurate Qibla compass bearing with ready-made components.
 site_author: Shahid Iqbal
 site_url: https://shahidzbi4213.github.io/GeoQibla/
 repo_url: https://github.com/Shahidzbi4213/GeoQibla
@@ -8,6 +8,7 @@ edit_uri: edit/main/docs/
 
 theme:
   name: material
+  custom_dir: overrides
   logo: assets/geoqibla-icon.svg
   favicon: assets/geoqibla-icon.svg
   language: en
@@ -44,6 +45,7 @@ plugins:
   - search
 
 markdown_extensions:
+  - meta
   - admonition
   - pymdownx.details
   - pymdownx.superfences
@@ -90,6 +92,8 @@ extra:
       link: https://github.com/Shahidzbi4213/GeoQibla
       name: GitHub
   version: 0.0.4
+  google_site_verification: ""
+  bing_site_verification: ""
 
 extra_css:
   - stylesheets/extra.css
