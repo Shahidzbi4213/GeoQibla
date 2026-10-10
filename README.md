@@ -296,6 +296,14 @@ Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for local comm
 
 If GeoQibla helps your app, star the repository and open issues with platform details, device model, OS version, GeoQibla version, and reproduction steps.
 
+## 👨‍💻 Author
+
+Developed by **[Shahid Iqbal](https://shahid-iqbal.dev/)** — Senior Android & Kotlin Multiplatform Engineer.
+
+Connect: [Portfolio](https://shahid-iqbal.dev/) • [LinkedIn](https://www.linkedin.com/in/shahidzbi/) • [GitHub](https://github.com/Shahidzbi4213) • [X (Twitter)](https://x.com/shahidzbi)
+
+---
+
 ## License
 
 ```
