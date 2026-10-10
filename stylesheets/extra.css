@@ -1,0 +1,24 @@
+:root {
+  --geoqibla-hero-border: rgba(9, 107, 88, 0.24);
+}
+
+.md-typeset .geoqibla-version {
+  display: inline-block;
+  margin: 0.25rem 0 0.75rem;
+  padding: 0.15rem 0.45rem;
+  border: 1px solid var(--geoqibla-hero-border);
+  border-radius: 0.25rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.md-typeset .geoqibla-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.md-typeset .geoqibla-grid > * {
+  margin: 0;
+}
